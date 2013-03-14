@@ -1,5 +1,4 @@
 import glob
-import logging
 from os import path
 
 from pyramid.path           import AssetResolver
@@ -10,8 +9,6 @@ from webassets              import Bundle
 from webassets.env          import Environment
 from webassets.env          import Resolver
 from webassets.exceptions   import BundleError
-
-log = logging.getLogger(__name__)
 
 class PyramidResolver(Resolver):
     def __init__(self, env):
@@ -182,8 +179,6 @@ def add_assets_global(event):
 
 
 def includeme(config):
-    log.debug("Adding directives and subscribers")
-    
     config.add_subscriber(add_assets_global, 'pyramid.events.BeforeRender')
     assets_env = get_webassets_env_from_settings(config.registry.settings)
     
